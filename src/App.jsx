@@ -12,7 +12,9 @@ function App() {
   return (
     <ThemeProvider>
       <div className="App">
-        <ThemeToggle />
+        <div className="theme-toggle-container">
+          <ThemeToggle />
+        </div>
         <Navbar />
         <main>
           <Hero />
@@ -20,6 +22,14 @@ function App() {
           <Projects />
           <Contact />
         </main>
+        <div className="social-taskbar">
+          <div className="social-icons">
+            <a href="https://x.com/adit_katiyar"><i className="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/adit-katiyar-0863692b9/"><i className="fab fa-linkedin-in"></i></a>
+            <a href="https://leetcode.com/u/Aditk060/"><i className="fas fa-code"></i></a>
+            <a href="https://github.com/Adi101-coder"><i className="fab fa-github"></i></a>
+          </div>
+        </div>
       </div>
     </ThemeProvider>
   );

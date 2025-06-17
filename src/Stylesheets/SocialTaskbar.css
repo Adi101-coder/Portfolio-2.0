@@ -1,0 +1,56 @@
+/* Updated social taskbar styles (SocialTaskbar.css) */
+
+.social-taskbar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Use a light gray background in light theme and a dark gray in dark theme */
+  background-color: #f0f0f0; /* Light gray (light theme) */
+  border: 1px solid #ccc; /* Thin border (light theme) */
+  border-radius: 50px; /* Pill shape */
+  padding: 0.5rem 1.5rem; /* Compact padding */
+  /* Fixed width and height so that it does not exceed its intended size */
+  width: auto; /* auto width (adjust as needed) */
+  height: 40px; /* fixed height */
+  /* Remove extra margins or paddings */
+  margin: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  /* Use gap to space out the icons evenly (instead of margin on each icon) */
+  gap: 2rem; /* spacing between icons */
+}
+
+/* Dark theme overrides (if you have a dark theme class or media query) */
+@media (prefers-color-scheme: dark) {
+  .social-taskbar {
+    background-color: #333; /* Dark gray (dark theme) */
+    border: 1px solid #555; /* Thin border (dark theme) */
+  }
+}
+
+/* Social icon styles (adjust as needed) */
+.social-taskbar a {
+  /* Removed extra margin (using gap on container instead) */
+  color: #555; /* icon color (light theme) */
+  font-size: 1.2rem; /* icon size */
+}
+
+@media (prefers-color-scheme: dark) {
+  .social-taskbar a {
+    color: #ccc; /* icon color (dark theme) */
+  }
+}
+
+/* Hover effect (optional) – unified hover rule */
+.social-taskbar a:hover {
+  color: #000; /* hover color (light theme) */
+}
+
+@media (prefers-color-scheme: dark) {
+  .social-taskbar a:hover {
+    color: #fff; /* hover color (dark theme) */
+  }
+} 

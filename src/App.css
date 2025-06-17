@@ -1,13 +1,13 @@
 :root {
   /* Vorta-inspired theme colors */
-  --primary-bg: #0A0A0A;
-  --secondary-bg: #1A1A1A;
-  --text-primary: #FFFFFF;
-  --text-secondary: #A0A0A0;
-  --accent-color: #00FF88;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --hover-bg: rgba(255, 255, 255, 0.1);
+  --primary-bg: #111827; /* Dark background similar to Vorta */
+  --secondary-bg: #1f2937; /* Slightly lighter dark background */
+  --text-primary: #f9fafb; /* Light text for dark background */
+  --text-secondary: #d1d5db; /* Lighter grey for secondary text */
+  --accent-color: #00FF88; /* Vibrant green accent */
+  --border-color: rgba(255, 255, 255, 0.15); /* Slightly stronger border */
+  --card-bg: rgba(255, 255, 255, 0.08); /* Slightly more opaque card background */
+  --hover-bg: rgba(255, 255, 255, 0.12); /* Slightly more opaque hover background */
   --gradient-start: #00FF88;
   --gradient-end: #00B8FF;
 }
@@ -25,7 +25,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  background-color: var(--primary-bg);
+  background-color: #000 ;
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -34,27 +34,28 @@ body {
   min-height: 100vh;
   position: relative;
   transition: background-color 0.3s ease;
+  background-color: #000 !important;
 }
 
 /* Theme classes */
 .dark-mode {
-  --primary-bg: #0A0A0A;
-  --secondary-bg: #1A1A1A;
-  --text-primary: #FFFFFF;
-  --text-secondary: #A0A0A0;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --hover-bg: rgba(255, 255, 255, 0.1);
+  --primary-bg: #111827;
+  --secondary-bg: #1f2937;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --border-color: rgba(255, 255, 255, 0.15);
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --hover-bg: rgba(255, 255, 255, 0.12);
 }
 
 .light-mode {
   --primary-bg: #FFFFFF;
-  --secondary-bg: #F5F5F5;
-  --text-primary: #0A0A0A;
-  --text-secondary: #666666;
+  --secondary-bg: #F0F0F0;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
   --border-color: rgba(0, 0, 0, 0.1);
-  --card-bg: rgba(0, 0, 0, 0.02);
-  --hover-bg: rgba(0, 0, 0, 0.05);
+  --card-bg: rgba(0, 0, 0, 0.05);
+  --hover-bg: rgba(0, 0, 0, 0.08);
 }
 
 /* Theme Toggle Button */
@@ -126,37 +127,83 @@ main {
   width: 100%;
 }
 
-/* Mobile Menu Theme Styles */
-.dark-mode .mobile-menu-overlay {
-  background-color: #0a0a0a;
+/* Remove Mobile Menu Theme Styles */
+
+.social-taskbar {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #232323;
+  border: 1px solid #6b7280;
+  border-radius: 30px;
+  padding: 0.7rem 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  z-index: 100;
 }
 
-.light-mode .mobile-menu-overlay {
-  background-color: #ffffff;
+.social-taskbar:hover {
+  transform: translateX(-50%) translateY(-2px);
+  border-color: #6b7280;
 }
 
-.dark-mode .mobile-search-box {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+.social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px; /* Spacing between icons */
 }
 
-.light-mode .mobile-search-box {
-  background-color: rgba(0, 0, 0, 0.1);
-  border-color: rgba(0, 0, 0, 0.2);
+.social-icons a {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.dark-mode .mobile-search-box input {
-  color: #ffffff;
+.social-icons a:hover {
+  color: #6b7280;
+  transform: scale(1.2);
 }
 
-.light-mode .mobile-search-box input {
-  color: #1a1a1a;
+/* Responsive adjustments for social taskbar */
+@media (max-width: 768px) {
+  .social-taskbar {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+    bottom: 20px;
+  }
+
+  .social-icons {
+    gap: 15px; /* Adjust gap for smaller screens */
+  }
+
+  .social-icons a {
+    font-size: 1rem;
+  }
 }
 
-.dark-mode .mobile-search-box input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+.theme-toggle-container {
+  position: fixed;
+  top: 32px;
+  right: 40px;
+  z-index: 200;
 }
 
-.light-mode .mobile-search-box input::placeholder {
-  color: rgba(0, 0, 0, 0.7);
+@media (max-width: 768px) {
+  .theme-toggle-container {
+    top: 16px;
+    right: 16px;
+  }
+}
+
+.download-resume-btn:hover {
+  background: #232323;
+  border-color: #6b7280;
+  color: #6b7280;
+  transform: translateY(-2px) scale(1.04);
 }

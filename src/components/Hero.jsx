@@ -1,61 +1,51 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../Stylesheets/Hero.css';
-import ThemeToggle from './ThemeToggle';
 
-const Hero = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const TITLES = [
+  'Full Stack Developer',
+  'ML Enthusiast',
+  'Competitive Programmer'
+];
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    document.body.classList.toggle('menu-open');
-  };
+const Hero = ({ theme }) => {
+  const [titleIndex, setTitleIndex] = useState(0);
+  const [fade, setFade] = useState(true);
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-    document.body.classList.remove('menu-open');
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setTitleIndex((prev) => (prev + 1) % TITLES.length);
+        setFade(true);
+      }, 300);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="hero">
-      <div className="hero-background">
+      <div className={`hero-background ${theme === 'light' ? 'light-dots' : ''}`}>
         <div className="grain-overlay"></div>
       </div>
       
       <div className="hero-content">
         <h1 className="hero-title">
-          <span className="line">Hi, I'm</span>
-          <span className="line highlight">Your Name</span>
-          <span className="line">Web Developer</span>
+          Hi, I'm Adit<br />
+          <span
+            className={`hero-animated-title fade-effect${fade ? ' fade-in' : ' fade-out'}`}
+          >
+            {TITLES[titleIndex]}
+          </span>
         </h1>
         <p className="hero-description">
-          I create beautiful and functional websites with modern technologies.
+
+          
+        Passionate about building impactful digital solutions at the intersection of Full Stack Development, Machine Learning, and Competitive Programming.
         </p>
-      </div>
-
-      <div className="hero-footer">
-        <button className="menu-btn" onClick={toggleMenu}>
-          Menu
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      <div className={`mobile-menu-overlay ${isMenuOpen ? 'open' : ''}`}>
-        <div className="mobile-menu-header">
-          <ThemeToggle />
-          <button className="close-menu-btn" onClick={closeMenu}>×</button>
-        </div>
-        <div className="mobile-nav-columns">
-          <ul className="mobile-nav-left-column">
-            <li><a href="#home" onClick={closeMenu}>Home</a></li>
-            <li><a href="#skills" onClick={closeMenu}>Skills</a></li>
-            <li><a href="#projects" onClick={closeMenu}>Projects</a></li>
-            <li><a href="#contact" onClick={closeMenu}>Contact</a></li>
-          </ul>
-          <ul className="mobile-nav-right-column">
-            <li><a href="#about" onClick={closeMenu}>About</a></li>
-            <li><a href="#blog" onClick={closeMenu}>Blog</a></li>
-            <li><a href="#resume" onClick={closeMenu}>Resume</a></li>
-          </ul>
+        <div className="hero-actions">
+          <button className="download-resume-btn">
+            Download Resume <i className="fas fa-download"></i>
+          </button>
         </div>
       </div>
     </section>
