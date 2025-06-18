@@ -1,197 +1,113 @@
-import React, { useState, useEffect } from 'react';
-import { Github, ExternalLink, ArrowRight, Code, Star, Zap } from 'lucide-react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext';
 import '../Stylesheets/Projects.css';
 
+
 const Projects = () => {
-  const [hoveredProject, setHoveredProject] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const section = document.querySelector('.projects-section');
-    if (section) observer.observe(section);
-
-    return () => observer.disconnect();
-  }, []);
+  const navigate = useNavigate();
+  const { theme } = useContext(ThemeContext);
 
   const projects = [
     {
       id: 1,
-      title: "Neural Network Dashboard",
-      description: "Advanced machine learning visualization platform with real-time model training, interactive neural network graphs, and comprehensive performance analytics.",
-      technologies: ["React", "Python", "TensorFlow", "D3.js", "WebGL"],
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      liveLink: "https://neural-dashboard-demo.com",
-      githubLink: "https://github.com/username/neural-dashboard",
-      category: "AI/ML",
-      status: "Featured"
+      title: "E-Commerce Platform",
+      description: "A full-stack e-commerce solution with modern UI and secure payment integration.",
+      tech: "React • Node.js • MongoDB",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop&auto=format",
+      liveUrl: "https://example-ecommerce.com",
+      githubUrl: "https://github.com/username/ecommerce-platform"
     },
     {
       id: 2,
-      title: "Quantum Code Editor",
-      description: "Next-generation code editor with quantum-inspired algorithms for code completion, intelligent refactoring, and collaborative development workflows.",
-      technologies: ["Electron", "Monaco Editor", "Node.js", "WebAssembly", "Redis"],
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      liveLink: "https://quantum-editor.dev",
-      githubLink: "https://github.com/username/quantum-editor",
-      category: "Developer Tools",
-      status: "Popular"
+      title: "Task Management App",
+      description: "Collaborative task management tool with real-time updates and team features.",
+      tech: "React • Firebase • Tailwind",
+      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=250&fit=crop&auto=format",
+      liveUrl: "https://example-taskapp.com",
+      githubUrl: "https://github.com/username/task-management"
     },
     {
       id: 3,
-      title: "Blockchain Explorer",
-      description: "Comprehensive blockchain analysis platform with transaction tracking, smart contract auditing, and decentralized finance monitoring capabilities.",
-      technologies: ["Vue.js", "Solidity", "GraphQL", "Docker", "IPFS"],
-      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      liveLink: "https://chain-explorer.app",
-      githubLink: "https://github.com/username/blockchain-explorer",
-      category: "Web3",
-      status: "New"
+      title: "Weather Dashboard",
+      description: "Real-time weather monitoring dashboard with interactive maps and forecasts.",
+      tech: "JavaScript • API • Chart.js",
+      image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=250&fit=crop&auto=format",
+      liveUrl: "https://example-weather.com",
+      githubUrl: "https://github.com/username/weather-dashboard"
     },
     {
       id: 4,
-      title: "Augmented Reality Studio",
-      description: "Immersive AR development platform enabling creators to build, test, and deploy augmented reality experiences with intuitive drag-and-drop interface.",
-      technologies: ["Three.js", "WebXR", "React", "Firebase", "WebGL"],
-      image: "https://images.unsplash.com/photo-1592478411213-6153e4ebc696?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      liveLink: "https://ar-studio.tech",
-      githubLink: "https://github.com/username/ar-studio",
-      category: "AR/VR",
-      status: "Featured"
+      title: "Portfolio Website",
+      description: "Responsive portfolio website with smooth animations and modern design.",
+      tech: "React • CSS3 • Framer Motion",
+      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=250&fit=crop&auto=format",
+      liveUrl: "https://example-portfolio.com",
+      githubUrl: "https://github.com/username/portfolio"
     }
   ];
 
-  const handleExploreMore = () => {
-    // Navigate to works page
-    console.log('Navigate to works page');
+  const handleViewAllWorks = () => {
+    navigate('/myworks');
   };
 
   return (
-    <section className="projects-section" id="projects">
+    <section className={`projects-section ${theme}`}>
       <div className="projects-container">
-        {/* Animated Background Elements */}
-        <div className="bg-elements">
-          <div className="floating-orb orb-1"></div>
-          <div className="floating-orb orb-2"></div>
-          <div className="floating-orb orb-3"></div>
-          <div className="grid-pattern"></div>
+        <div className="projects-header">
+          <h2 className="projects-title">Projects</h2>
+          <p className="projects-subtitle">A showcase of my recent work</p>
         </div>
-
-        <div className={`projects-header ${isVisible ? 'animate-in' : ''}`}>
-          <div className="section-badge">
-            <Star className="badge-icon" />
-            <span>Featured Projects</span>
-          </div>
-          <h2 className="section-title">
-            Crafting Digital
-            <span className="title-highlight"> Masterpieces</span>
-          </h2>
-          <p className="section-subtitle">
-            Innovative solutions that push the boundaries of technology and creativity
-          </p>
-        </div>
-
-        <div className={`projects-grid ${isVisible ? 'animate-in' : ''}`}>
-          {projects.map((project, index) => (
-            <div
-              key={project.id}
-              className={`project-card ${hoveredProject === project.id ? 'hovered' : ''}`}
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
-              style={{ animationDelay: `${index * 0.15}s` }}
-            >
-              <div className="card-glow"></div>
-              
-              <div className="project-badges">
-                <span className={`status-badge ${project.status.toLowerCase()}`}>
-                  {project.status}
-                </span>
-                <span className="category-badge">{project.category}</span>
-              </div>
-
-              <div className="project-image-wrapper">
-                <div className="image-container">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="project-image"
-                  />
-                  <div className="image-overlay">
-                    <div className="overlay-content">
-                      <div className="project-links">
-                        <a 
-                          href={project.liveLink} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="project-link live-link"
-                        >
-                          <ExternalLink className="link-icon" />
-                          <span>Live Demo</span>
-                        </a>
-                        <a 
-                          href={project.githubLink} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="project-link github-link"
-                        >
-                          <Github className="link-icon" />
-                          <span>Code</span>
-                        </a>
-                      </div>
-                    </div>
+        
+        <div className="projects-grid">
+          {projects.map((project) => (
+            <div key={project.id} className="project-card">
+              <div className="project-image-container">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="project-image"
+                />
+                <div className="project-overlay">
+                  <div className="project-links">
+                    <a 
+                      href={project.liveUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="project-link live-link"
+                    >
+                      Live View
+                    </a>
+                    <a 
+                      href={project.githubUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="project-link github-link"
+                    >
+                      GitHub
+                    </a>
                   </div>
                 </div>
-                <div className="image-border"></div>
               </div>
-
-              <div className="project-info">
+              
+              <div className="project-content">
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-description">{project.description}</p>
-                
-                <div className="tech-stack">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span key={techIndex} className="tech-pill">
-                      <Code className="tech-icon" />
-                      {tech}
-                    </span>
-                  ))}
+                <div className="project-tech">
+                  <span className="tech-stack">{project.tech}</span>
                 </div>
               </div>
-
-              <div className="card-shine"></div>
             </div>
           ))}
         </div>
-
-        <div className={`explore-section ${isVisible ? 'animate-in' : ''}`}>
-          <div className="explore-content">
-            <div className="explore-text">
-              <h3 className="explore-title">Discover More</h3>
-              <p className="explore-subtitle">
-                Explore my complete portfolio of innovative projects and creative solutions
-              </p>
-            </div>
-            <button className="explore-btn" onClick={handleExploreMore}>
-              <span className="btn-text">View All Projects</span>
-              <div className="btn-icon-wrapper">
-                <ArrowRight className="btn-icon" />
-              </div>
-              <div className="btn-ripple"></div>
-            </button>
-          </div>
-          <div className="explore-decoration">
-            <Zap className="decoration-icon" />
-          </div>
+        
+        <div className="projects-footer">
+          <button 
+            className="view-all-btn"
+            onClick={handleViewAllWorks}
+          >
+            View All Works
+          </button>
         </div>
       </div>
     </section>
