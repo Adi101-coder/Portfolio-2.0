@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext'; // Adjust path as needed
 
 const Contact = () => {
+  const { theme } = useContext(ThemeContext) || { theme: 'dark' }; // Fallback to dark if context not available
+  
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -69,7 +73,6 @@ const Contact = () => {
     } else {
       setSelectedMethod(method);
       setAnimatedCards(prev => [...prev, method.id]);
-      // Open external link
       if (method.url) {
         window.open(method.url, '_blank');
       }
@@ -89,7 +92,6 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Create mailto link
     const subject = encodeURIComponent(formData.subject || 'Contact from Website');
     const body = encodeURIComponent(`Hi Adit,
 
@@ -107,7 +109,6 @@ ${formData.name}`);
     
     setIsFormVisible(false);
     setSelectedMethod(null);
-    // Reset form
     setFormData({
       name: '',
       email: '',
@@ -130,15 +131,86 @@ ${formData.name}`);
     }
   };
 
+  // Theme-based styles
+  const getThemeStyles = () => {
+    const isDark = theme === 'dark';
+    
+    return {
+      container: {
+        minHeight: '100vh',
+        background: isDark ? '#000000' : '#ffffff',
+        color: isDark ? '#ffffff' : '#000000',
+        padding: '20px 20px 40px',
+        position: 'relative',
+        overflow: 'hidden',
+        transition: 'all 0.3s ease'
+      },
+      floatingDot: {
+        background: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+      },
+      card: {
+        background: isDark 
+          ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02))'
+          : 'linear-gradient(135deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02))',
+        border: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.1)',
+        backdropFilter: 'blur(10px)'
+      },
+      cardHover: {
+        borderColor: isDark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)',
+        background: isDark 
+          ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))'
+          : 'linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.05))',
+        boxShadow: isDark ? '0 20px 40px rgba(0, 0, 0, 0.3)' : '0 20px 40px rgba(0, 0, 0, 0.15)'
+      },
+      iconWrapper: {
+        background: isDark 
+          ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))'
+          : 'linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.05))'
+      },
+      subtitle: {
+        color: isDark ? '#aaaaaa' : '#666666'
+      },
+      description: {
+        color: isDark ? '#888888' : '#777777'
+      },
+      cardValue: {
+        background: isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+        border: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.1)'
+      },
+      selectedInfo: {
+        background: isDark 
+          ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03))'
+          : 'linear-gradient(135deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.03))',
+        border: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.1)'
+      },
+      contactDetail: {
+        background: isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'
+      },
+      modalOverlay: {
+        background: isDark ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)'
+      },
+      modalContent: {
+        background: isDark ? '#000000' : '#ffffff',
+        border: isDark ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.2)'
+      },
+      formInput: {
+        border: isDark ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.2)',
+        background: isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+        color: isDark ? '#ffffff' : '#000000'
+      },
+      submitButton: {
+        background: isDark 
+          ? 'linear-gradient(135deg, #ffffff, #cccccc)'
+          : 'linear-gradient(135deg, #000000, #333333)',
+        color: isDark ? '#000000' : '#ffffff'
+      }
+    };
+  };
+
+  const themeStyles = getThemeStyles();
+
   return (
-    <div style={{ 
-      minHeight: '100vh',
-      background: '#000000',
-      color: '#ffffff',
-      padding: '40px 20px',
-      position: 'relative',
-      overflow: 'hidden'
-    }}>
+    <div style={themeStyles.container}>
       <style>{`
         .floating-elements {
           position: absolute;
@@ -154,7 +226,7 @@ ${formData.name}`);
           position: absolute;
           width: 4px;
           height: 4px;
-          background: rgba(255, 255, 255, 0.1);
+          background: ${themeStyles.floatingDot.background};
           border-radius: 50%;
           transition: all 2s ease;
         }
@@ -171,44 +243,26 @@ ${formData.name}`);
           height: 3px;
         }
 
-        .hero-section {
-          text-align: center;
-          margin-bottom: 80px;
-          position: relative;
-          z-index: 2;
-        }
-
-        .main-title {
-          font-size: clamp(2.5rem, 5vw, 4rem);
-          font-weight: 800;
-          margin-bottom: 20px;
-          background: linear-gradient(135deg, #ffffff, #888888);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          line-height: 1.2;
-        }
-
         .contact-methods-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 30px;
           max-width: 1200px;
-          margin: 0 auto 80px;
+          margin: 40px auto 80px;
           position: relative;
           z-index: 2;
         }
 
         .contact-method-card {
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: ${themeStyles.card.background};
+          border: ${themeStyles.card.border};
           border-radius: 20px;
           padding: 40px 30px;
           cursor: pointer;
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
           overflow: hidden;
-          backdrop-filter: blur(10px);
+          backdrop-filter: ${themeStyles.card.backdropFilter};
           animation: slideInUp 0.6s ease forwards;
         }
 
@@ -225,14 +279,14 @@ ${formData.name}`);
 
         .contact-method-card:hover {
           transform: translateY(-10px) scale(1.02);
-          border-color: rgba(255, 255, 255, 0.3);
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+          border-color: ${themeStyles.cardHover.borderColor};
+          background: ${themeStyles.cardHover.background};
+          box-shadow: ${themeStyles.cardHover.boxShadow};
         }
 
         .contact-method-card.selected {
-          border-color: rgba(255, 255, 255, 0.5);
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+          border-color: ${themeStyles.cardHover.borderColor};
+          background: ${themeStyles.cardHover.background};
           transform: translateY(-5px) scale(1.05);
         }
 
@@ -258,13 +312,13 @@ ${formData.name}`);
           display: flex;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+          background: ${themeStyles.iconWrapper.background};
           border-radius: 50%;
           transition: all 0.3s ease;
         }
 
         .contact-method-card:hover .icon-wrapper {
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+          background: ${themeStyles.cardHover.background};
           transform: scale(1.1);
         }
 
@@ -272,19 +326,19 @@ ${formData.name}`);
           font-size: 1.5rem;
           font-weight: 700;
           margin-bottom: 8px;
-          color: #ffffff;
+          color: ${theme === 'dark' ? '#ffffff' : '#000000'};
         }
 
         .card-subtitle {
           font-size: 1rem;
-          color: #aaaaaa;
+          color: ${themeStyles.subtitle.color};
           margin-bottom: 15px;
           font-weight: 500;
         }
 
         .card-description {
           font-size: 0.95rem;
-          color: #888888;
+          color: ${themeStyles.description.color};
           line-height: 1.5;
           margin-bottom: 20px;
         }
@@ -292,12 +346,12 @@ ${formData.name}`);
         .card-value {
           font-size: 1.1rem;
           font-weight: 600;
-          color: #ffffff;
+          color: ${theme === 'dark' ? '#ffffff' : '#000000'};
           padding: 10px 20px;
-          background: rgba(255, 255, 255, 0.05);
+          background: ${themeStyles.cardValue.background};
           border-radius: 25px;
           display: inline-block;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: ${themeStyles.cardValue.border};
         }
 
         .card-overlay {
@@ -306,7 +360,9 @@ ${formData.name}`);
           left: 0;
           right: 0;
           bottom: 0;
-          background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.02));
+          background: ${theme === 'dark' 
+            ? 'linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.02))'
+            : 'linear-gradient(135deg, transparent, rgba(0, 0, 0, 0.02))'};
           opacity: 0;
           transition: opacity 0.3s ease;
         }
@@ -320,9 +376,9 @@ ${formData.name}`);
           margin: 0 auto 60px;
           text-align: center;
           padding: 40px;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+          background: ${themeStyles.selectedInfo.background};
           border-radius: 20px;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: ${themeStyles.selectedInfo.border};
           animation: fadeIn 0.5s ease;
           position: relative;
           z-index: 2;
@@ -336,7 +392,7 @@ ${formData.name}`);
         .selected-info h3 {
           font-size: 1.5rem;
           margin-bottom: 25px;
-          color: #ffffff;
+          color: ${theme === 'dark' ? '#ffffff' : '#000000'};
         }
 
         .contact-detail {
@@ -345,36 +401,36 @@ ${formData.name}`);
           justify-content: center;
           gap: 20px;
           padding: 20px;
-          background: rgba(255, 255, 255, 0.05);
+          background: ${themeStyles.contactDetail.background};
           border-radius: 15px;
           cursor: pointer;
           transition: all 0.3s ease;
         }
 
         .contact-detail:hover {
-          background: rgba(255, 255, 255, 0.08);
+          background: ${theme === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)'};
           transform: scale(1.02);
         }
 
         .detail-icon {
-          color: #ffffff;
+          color: ${theme === 'dark' ? '#ffffff' : '#000000'};
         }
 
         .detail-content h4 {
           font-size: 1.2rem;
           margin-bottom: 5px;
-          color: #ffffff;
+          color: ${theme === 'dark' ? '#ffffff' : '#000000'};
         }
 
         .detail-content p {
           font-size: 1.1rem;
-          color: #cccccc;
+          color: ${theme === 'dark' ? '#cccccc' : '#666666'};
           margin-bottom: 5px;
         }
 
         .copy-hint {
           font-size: 0.85rem;
-          color: #888888;
+          color: ${theme === 'dark' ? '#888888' : '#777777'};
         }
 
         .modal-overlay {
@@ -383,7 +439,7 @@ ${formData.name}`);
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(0, 0, 0, 0.8);
+          background: ${themeStyles.modalOverlay.background};
           display: flex;
           align-items: center;
           justify-content: center;
@@ -393,8 +449,8 @@ ${formData.name}`);
         }
 
         .modal-content {
-          background: #000000;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          background: ${themeStyles.modalContent.background};
+          border: ${themeStyles.modalContent.border};
           border-radius: 20px;
           padding: 40px;
           max-width: 600px;
@@ -411,7 +467,7 @@ ${formData.name}`);
           right: 20px;
           background: none;
           border: none;
-          color: #ffffff;
+          color: ${theme === 'dark' ? '#ffffff' : '#000000'};
           cursor: pointer;
           padding: 10px;
           border-radius: 50%;
@@ -419,7 +475,7 @@ ${formData.name}`);
         }
 
         .close-button:hover {
-          background: rgba(255, 255, 255, 0.1);
+          background: ${theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'};
           transform: scale(1.1);
         }
 
@@ -431,11 +487,11 @@ ${formData.name}`);
         .form-header h2 {
           font-size: 2rem;
           margin-bottom: 10px;
-          color: #ffffff;
+          color: ${theme === 'dark' ? '#ffffff' : '#000000'};
         }
 
         .form-header p {
-          color: #cccccc;
+          color: ${theme === 'dark' ? '#cccccc' : '#666666'};
           font-size: 1.1rem;
         }
 
@@ -459,32 +515,32 @@ ${formData.name}`);
         .form-group label {
           font-size: 1rem;
           font-weight: 500;
-          color: #ffffff;
+          color: ${theme === 'dark' ? '#ffffff' : '#000000'};
           margin-bottom: 8px;
         }
 
         .form-group input,
         .form-group textarea {
           padding: 15px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          border: ${themeStyles.formInput.border};
           border-radius: 10px;
-          background: rgba(255, 255, 255, 0.05);
-          color: #ffffff;
+          background: ${themeStyles.formInput.background};
+          color: ${themeStyles.formInput.color};
           font-size: 1rem;
           transition: all 0.3s ease;
         }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-          color: #888888;
+          color: ${theme === 'dark' ? '#888888' : '#999999'};
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
           outline: none;
-          border-color: rgba(255, 255, 255, 0.5);
-          background: rgba(255, 255, 255, 0.08);
-          box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+          border-color: ${theme === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.5)'};
+          background: ${theme === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)'};
+          box-shadow: 0 0 0 3px ${theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'};
         }
 
         .form-group textarea {
@@ -493,8 +549,8 @@ ${formData.name}`);
         }
 
         .submit-button {
-          background: linear-gradient(135deg, #ffffff, #cccccc);
-          color: #000000;
+          background: ${themeStyles.submitButton.background};
+          color: ${themeStyles.submitButton.color};
           border: none;
           padding: 18px 40px;
           border-radius: 50px;
@@ -510,9 +566,13 @@ ${formData.name}`);
         }
 
         .submit-button:hover {
-          background: linear-gradient(135deg, #cccccc, #999999);
+          background: ${theme === 'dark' 
+            ? 'linear-gradient(135deg, #cccccc, #999999)'
+            : 'linear-gradient(135deg, #333333, #666666)'};
           transform: translateY(-2px);
-          box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+          box-shadow: 0 10px 30px ${theme === 'dark' 
+            ? 'rgba(255, 255, 255, 0.2)'
+            : 'rgba(0, 0, 0, 0.2)'};
         }
 
         @media (max-width: 768px) {
@@ -536,6 +596,11 @@ ${formData.name}`);
           .modal-content {
             padding: 30px 20px;
           }
+
+          .hero-section {
+            margin-top: 10px;
+            margin-bottom: 40px;
+          }
         }
       `}</style>
 
@@ -556,10 +621,6 @@ ${formData.name}`);
       </div>
 
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <div className="hero-section">
-          <h1 className="main-title">Let's Create Something Amazing Together</h1>
-        </div>
-
         <div className="contact-methods-grid">
           {contactMethods.map((method, index) => (
             <div
