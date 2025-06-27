@@ -172,15 +172,23 @@
 
 /* Light mode social taskbar styling */
 .light-mode .social-taskbar a {
-  color: #ffffff !important;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 50%;
-  padding: 4px;
+  color: #000000 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-size: 22px !important;
+  width: 30px !important;
+  height: 30px !important;
 }
 
 .light-mode .social-taskbar a:hover {
-  background: rgba(0, 0, 0, 0.9);
-  transform: scale(1.2) translateX(5px);
+  background: transparent !important;
+  color: #ffffff !important;
+  transform: scale(1.3) translateX(5px);
+  box-shadow: none !important;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Enhanced Social Float Animation */
@@ -259,11 +267,11 @@
 }
 
 .download-resume-btn:hover {
-  background: #3b82f6;
-  border-color: #3b82f6;
+  background: #000000;
+  border-color: #000000;
   color: #ffffff;
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   animation-play-state: paused;
 }
 
@@ -276,8 +284,8 @@
 }
 
 .light-mode .download-resume-btn:hover {
-  background: #3b82f6;
-  border-color: #3b82f6;
+  background: #000000;
+  border-color: #000000;
   color: #ffffff;
 }
 
@@ -285,12 +293,6 @@
   color: inherit;
   font-size: 1.2em;
   transition: all 0.3s ease;
-  animation: iconSpin 8s linear infinite;
-}
-
-@keyframes iconSpin {
-  0%, 90%, 100% { transform: rotate(0deg); }
-  95% { transform: rotate(360deg); }
 }
 
 /* Enhanced Button Pulse Animation */
@@ -408,14 +410,21 @@
   
   /* Light mode mobile social taskbar */
   .light-mode .social-taskbar a {
-    background: rgba(0, 0, 0, 0.15) !important;
-    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+    background: transparent !important;
+    border: none !important;
     color: #000000 !important;
+    box-shadow: none !important;
+    font-size: 20px !important;
+    width: 28px !important;
+    height: 28px !important;
   }
   
   .light-mode .social-taskbar a:hover {
-    background: rgba(0, 0, 0, 0.25) !important;
-    color: #000000 !important;
+    background: transparent !important;
+    color: #ffffff !important;
+    transform: scale(1.25) translateX(8px);
+    box-shadow: none !important;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -467,4 +476,11 @@
     font-size: 1.2rem;
     max-width: 800px;
   }
+}
+
+.contact-gradient-heading {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }

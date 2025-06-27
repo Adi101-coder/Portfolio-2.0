@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { ExternalLink, Eye, Star, GitBranch, Calendar } from 'lucide-react';
 import { useTheme } from './context/ThemeContext'; // Import from your existing context
 
@@ -142,6 +143,73 @@ const MyWorks = () => {
     }
   };
 
+  // Framer Motion variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      y: -12,
+      scale: 1.02,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    hover: {
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 10 },
+    hover: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.2,
+        ease: "easeOut"
+      }
+    }
+  };
+
   const styles = {
     container: {
       minHeight: '100vh',
@@ -149,7 +217,7 @@ const MyWorks = () => {
       color: currentTheme.text,
       transition: 'all 0.3s ease',
       padding: '2rem',
-      paddingTop: '4rem', // Add top padding to account for your existing theme toggle
+      paddingTop: '4rem',
       fontFamily: '"Inter", system-ui, -apple-system, sans-serif',
       position: 'relative'
     },
@@ -179,8 +247,7 @@ const MyWorks = () => {
       width: '100px',
       height: '4px',
       background: `linear-gradient(90deg, ${currentTheme.accent}, ${currentTheme.textMuted})`,
-      borderRadius: '2px',
-      animation: 'expandLine 1.5s ease-out 0.5s both'
+      borderRadius: '2px'
     },
     subtitle: {
       fontSize: '1.25rem',
@@ -202,18 +269,9 @@ const MyWorks = () => {
       border: `1px solid ${currentTheme.border}`,
       borderRadius: '20px',
       overflow: 'hidden',
-      transition: 'all 0.4s cubic-bezier(0.23, 1, 0.320, 1)',
       cursor: 'pointer',
       position: 'relative',
-      boxShadow: `0 4px 20px ${currentTheme.shadow}`,
-      opacity: 0,
-      transform: 'translateY(30px)',
-      animation: 'fadeInUp 0.6s ease-out both'
-    },
-    cardHover: {
-      transform: 'translateY(-12px) scale(1.02)',
-      boxShadow: `0 20px 40px ${currentTheme.shadowHover}`,
-      borderColor: currentTheme.accent
+      boxShadow: `0 4px 20px ${currentTheme.shadow}`
     },
     imageContainer: {
       position: 'relative',
@@ -225,12 +283,7 @@ const MyWorks = () => {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
-      transition: 'all 0.4s ease',
       filter: isDark ? 'brightness(0.9) contrast(1.1)' : 'brightness(1.1) contrast(0.9)'
-    },
-    imageHover: {
-      transform: 'scale(1.1)',
-      filter: isDark ? 'brightness(1) contrast(1.2)' : 'brightness(1.2) contrast(1)'
     },
     overlay: {
       position: 'absolute',
@@ -243,12 +296,7 @@ const MyWorks = () => {
       alignItems: 'center',
       justifyContent: 'center',
       gap: '1rem',
-      opacity: 0,
-      transition: 'all 0.3s ease',
       backdropFilter: 'blur(10px)'
-    },
-    overlayVisible: {
-      opacity: 1
     },
     actionBtn: {
       background: currentTheme.bg,
@@ -262,8 +310,6 @@ const MyWorks = () => {
       fontSize: '0.9rem',
       fontWeight: '600',
       cursor: 'pointer',
-      transition: 'all 0.2s ease',
-      transform: 'translateY(10px)',
       boxShadow: `0 4px 15px ${currentTheme.shadow}`
     },
     content: {
@@ -321,125 +367,110 @@ const MyWorks = () => {
       fontWeight: '500',
       border: `1px solid ${currentTheme.border}`,
       transition: 'all 0.2s ease'
-    },
-    cta: {
-      textAlign: 'center',
-      marginTop: '3rem',
-      padding: '2rem 2rem'
-    },
-    ctaTitle: {
-      fontSize: '2.5rem',
-      fontWeight: '800',
-      color: currentTheme.text,
-      marginBottom: '1rem'
-    },
-    ctaSubtitle: {
-      fontSize: '1.1rem',
-      color: currentTheme.textMuted,
-      marginBottom: '3rem',
-      maxWidth: '600px',
-      margin: '0 auto 3rem auto',
-      lineHeight: '1.6'
     }
   };
 
   return (
-    <div style={styles.container}>
-      <style>
-        {`
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
-          @keyframes expandLine {
-            from { width: 0; }
-            to { width: 100px; }
-          }
-          
-          @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr !important; }
-            .container { padding: 1rem !important; }
-          }
-        `}
-      </style>
-
-      <div style={styles.header}>
-        <h1 style={styles.title}>
+    <motion.div 
+      style={styles.container}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div 
+        style={styles.header}
+        variants={headerVariants}
+      >
+        <motion.h1 
+          style={styles.title}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           My Works
-          <div style={styles.titleAccent} />
-        </h1>
-        <p style={styles.subtitle}>
+          <motion.div 
+            style={styles.titleAccent}
+            initial={{ width: 0 }}
+            animate={{ width: '100px' }}
+            transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+          />
+        </motion.h1>
+        <motion.p 
+          style={styles.subtitle}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
           A curated collection of innovative projects showcasing modern web development,
           creative problem-solving, and cutting-edge technologies
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
 
-      <div style={styles.grid}>
+      <motion.div 
+        style={styles.grid}
+        variants={containerVariants}
+      >
         {projects.map((project, index) => {
           const isVisible = visibleCards.has(index.toString());
           const isHovered = hoveredCard === project.id;
           
           return (
-            <div
+            <motion.div
               key={project.id}
-              data-index={index}
-              style={{
-                ...styles.card,
-                ...(isHovered ? styles.cardHover : {}),
-                animationDelay: `${index * 0.1}s`,
-                ...(isVisible ? { opacity: 1, transform: 'translateY(0)' } : {})
-              }}
+              style={styles.card}
+              variants={cardVariants}
+              whileHover="hover"
               onMouseEnter={() => setHoveredCard(project.id)}
               onMouseLeave={() => setHoveredCard(null)}
             >
               <div style={styles.imageContainer}>
-                <img
-                  src={project.image}
+                <motion.img 
+                  src={project.image} 
                   alt={project.title}
                   style={{
                     ...styles.image,
-                    ...(isHovered ? styles.imageHover : {})
+                    ...(isHovered ? { filter: isDark ? 'brightness(1) contrast(1.2)' : 'brightness(1.2) contrast(1)' } : {})
                   }}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.4 }}
                 />
-                <div style={{
-                  ...styles.overlay,
-                  ...(isHovered ? styles.overlayVisible : {})
-                }}>
-                  <button
-                    style={{
-                      ...styles.actionBtn,
-                      transform: isHovered ? 'translateY(0)' : 'translateY(10px)'
-                    }}
+                <motion.div 
+                  style={{
+                    ...styles.statusBadge,
+                    backgroundColor: getStatusColor(project.status)
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.2 }}
+                >
+                  {project.status}
+                </motion.div>
+                
+                <motion.div 
+                  style={styles.overlay}
+                  variants={overlayVariants}
+                >
+                  <motion.button 
+                    style={styles.actionBtn}
+                    variants={buttonVariants}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <Eye size={16} />
-                    Preview
-                  </button>
-                  <button
-                    style={{
-                      ...styles.actionBtn,
-                      transform: isHovered ? 'translateY(0)' : 'translateY(10px)',
-                      transitionDelay: '0.1s'
-                    }}
+                    View Project
+                  </motion.button>
+                  <motion.button 
+                    style={styles.actionBtn}
+                    variants={buttonVariants}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <ExternalLink size={16} />
-                    Visit
-                  </button>
-                </div>
-                <div style={{
-                  ...styles.statusBadge,
-                  background: getStatusColor(project.status)
-                }}>
-                  {project.status}
-                </div>
+                    Live Demo
+                  </motion.button>
+                </motion.div>
               </div>
-
+              
               <div style={styles.content}>
                 <h3 style={styles.projectTitle}>{project.title}</h3>
                 <p style={styles.description}>{project.description}</p>
@@ -458,33 +489,27 @@ const MyWorks = () => {
                     {project.date}
                   </div>
                 </div>
-
+                
                 <div style={styles.tags}>
                   {project.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      style={{
-                        ...styles.tag,
-                        animationDelay: `${tagIndex * 0.1}s`
-                      }}
+                    <motion.span 
+                      key={tagIndex} 
+                      style={styles.tag}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: 0.1 * tagIndex }}
+                      whileHover={{ scale: 1.05 }}
                     >
                       {tag}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           );
         })}
-      </div>
-
-      <div style={styles.cta}>
-        <h2 style={styles.ctaTitle}>Ready to Build Something Amazing?</h2>
-        <p style={styles.ctaSubtitle}>
-          Let's collaborate on your next project and bring your ideas to life with innovative solutions
-        </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

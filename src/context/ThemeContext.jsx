@@ -19,6 +19,8 @@ export const ThemeProvider = ({ children }) => {
     // Update document class for global styles
     document.documentElement.classList.remove('dark-mode', 'light-mode');
     document.documentElement.classList.add(`${theme}-mode`);
+    document.body.classList.remove('dark-mode', 'light-mode');
+    document.body.classList.add(`${theme}-mode`);
   }, [theme]);
 
   const toggleTheme = () => {

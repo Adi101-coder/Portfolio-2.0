@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import '../Stylesheets/Skills.css';
 
 const Skills = () => {
@@ -62,33 +63,115 @@ const Skills = () => {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const categoryVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const skillVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const progressVariants = {
+    hidden: { width: 0 },
+    visible: (level) => ({
+      width: `${level}%`,
+      transition: {
+        duration: 1.2,
+        ease: "easeOut",
+        delay: 0.3
+      }
+    })
+  };
+
   return (
     <section className="skills-section" id="skills">
-      <div className="skills-container">
-        <h2 className="section-title">Skills & Expertise</h2>
-        <div className="skills-grid">
+      <motion.div 
+        className="skills-container"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Skills & Expertise
+        </motion.h2>
+        
+        <motion.div 
+          className="skills-grid"
+          variants={containerVariants}
+        >
           {skills.map((category, index) => (
-            <div className="skill-category" key={index}>
-              <h3 className="category-title">{category.category}</h3>
-              <div className="skills-list">
+            <motion.div 
+              className="skill-category" 
+              key={index}
+              variants={categoryVariants}
+            >
+              <motion.h3 
+                className="category-title"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                {category.category}
+              </motion.h3>
+              
+              <motion.div 
+                className="skills-list"
+                variants={containerVariants}
+              >
                 {category.items.map((skill, skillIndex) => (
-                  <div className="skill-item" key={skillIndex}>
+                  <motion.div 
+                    className="skill-item" 
+                    key={skillIndex}
+                    variants={skillVariants}
+                  >
                     <div className="skill-info">
                       <span className="skill-name">{skill.name}</span>
                     </div>
                     <div className="skill-bar">
-                      <div 
-                        className="skill-progress" 
-                        style={{ width: `${skill.level}%` }}
-                      />
+                      <div className="skill-progress" />
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

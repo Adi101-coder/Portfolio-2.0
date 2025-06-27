@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { ThemeContext } from '../context/ThemeContext';
 import '../Stylesheets/Projects.css';
 
@@ -51,43 +52,133 @@ const Projects = () => {
     navigate('/myworks');
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      y: -10,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    hover: {
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      scale: 1.05,
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut"
+      }
+    },
+    tap: {
+      scale: 0.95
+    }
+  };
+
   return (
     <section className={`projects-section ${theme}`}>
-      <div className="projects-container">
-        <div className="projects-header">
+      <motion.div 
+        className="projects-container"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <motion.div 
+          className="projects-header"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <h2 className="projects-title">Projects</h2>
           <p className="projects-subtitle">A showcase of my recent work</p>
-        </div>
+        </motion.div>
         
-        <div className="projects-grid">
+        <motion.div 
+          className="projects-grid"
+          variants={containerVariants}
+        >
           {projects.map((project) => (
-            <div key={project.id} className="project-card">
+            <motion.div 
+              key={project.id} 
+              className="project-card"
+              variants={cardVariants}
+              whileHover="hover"
+            >
               <div className="project-image-container">
                 <img 
                   src={project.image} 
                   alt={project.title}
                   className="project-image"
                 />
-                <div className="project-overlay">
+                <motion.div 
+                  className="project-overlay"
+                  variants={overlayVariants}
+                >
                   <div className="project-links">
-                    <a 
+                    <motion.a 
                       href={project.liveUrl} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="project-link live-link"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
                     >
                       Live View
-                    </a>
-                    <a 
+                    </motion.a>
+                    <motion.a 
                       href={project.githubUrl} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="project-link github-link"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
                     >
                       GitHub
-                    </a>
+                    </motion.a>
                   </div>
-                </div>
+                </motion.div>
               </div>
               
               <div className="project-content">
@@ -97,19 +188,28 @@ const Projects = () => {
                   <span className="tech-stack">{project.tech}</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
         
-        <div className="projects-footer">
-          <button 
+        <motion.div 
+          className="projects-footer"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <motion.button 
             className="view-all-btn"
             onClick={handleViewAllWorks}
+            variants={buttonVariants}
+            whileHover="hover"
+            whileTap="tap"
           >
             View All Works
-          </button>
-        </div>
-      </div>
+          </motion.button>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

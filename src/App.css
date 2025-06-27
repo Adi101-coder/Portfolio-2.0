@@ -25,16 +25,31 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  background-color: #000 ;
-  color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode body {
+  background-color: #000;
+  color: var(--text-primary);
+}
+
+.light-mode body {
+  background-color: #ffffff;
+  color: var(--text-primary);
 }
 
 .App {
   min-height: 100vh;
   position: relative;
   transition: background-color 0.3s ease;
+}
+
+.dark-mode .App {
   background-color: #000 !important;
+}
+
+.light-mode .App {
+  background-color: #ffffff !important;
 }
 
 /* Theme classes */
@@ -127,15 +142,48 @@ main {
   width: 100%;
 }
 
-/* Remove Mobile Menu Theme Styles */
+/* Social Media Bar - Dark Mode */
+.dark-mode .social-taskbar {
+  background-color: #232323;
+  border: 1px solid #6b7280;
+}
 
+.dark-mode .social-taskbar:hover {
+  border-color: #6b7280;
+}
+
+.dark-mode .social-icons a {
+  color: var(--text-primary);
+}
+
+.dark-mode .social-icons a:hover {
+  color: #6b7280;
+}
+
+/* Social Media Bar - Light Mode */
+.light-mode .social-taskbar {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+.light-mode .social-taskbar:hover {
+  border-color: #adb5bd;
+}
+
+.light-mode .social-icons a {
+  color: #495057;
+}
+
+.light-mode .social-icons a:hover {
+  color: #6c757d;
+}
+
+/* Original Social Media Bar */
 .social-taskbar {
   position: fixed;
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #232323;
-  border: 1px solid #6b7280;
   border-radius: 30px;
   padding: 0.7rem 1.8rem;
   display: flex;
@@ -149,7 +197,6 @@ main {
 
 .social-taskbar:hover {
   transform: translateX(-50%) translateY(-2px);
-  border-color: #6b7280;
 }
 
 .social-icons {
@@ -160,13 +207,11 @@ main {
 }
 
 .social-icons a {
-  color: var(--text-primary);
   font-size: 1.2rem;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .social-icons a:hover {
-  color: #6b7280;
   transform: scale(1.2);
 }
 
@@ -187,23 +232,34 @@ main {
   }
 }
 
-.theme-toggle-container {
-  position: fixed;
-  top: 32px;
-  right: 40px;
-  z-index: 200;
-}
-
-@media (max-width: 768px) {
-  .theme-toggle-container {
-    top: 16px;
-    right: 16px;
-  }
+/* Original Download Resume Button */
+.download-resume-btn {
+  background: #232323;
+  color: #ffffff;
+  border: 1px solid #6b7280;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
 }
 
 .download-resume-btn:hover {
-  background: #232323;
+  background: #6b7280;
   border-color: #6b7280;
-  color: #6b7280;
+  color: #ffffff;
   transform: translateY(-2px) scale(1.04);
+}
+
+.download-resume-btn i {
+  transition: none;
+}
+
+.download-resume-btn:hover i {
+  transform: none;
 }

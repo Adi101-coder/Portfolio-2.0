@@ -1,6 +1,6 @@
 /* Modern Minimalist Skills Section */
 .skills-section {
-  padding: 8rem 2rem;
+  padding: 8rem 2rem 0.5rem 2rem;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
@@ -354,28 +354,34 @@
   height: 100%;
   border-radius: 2px;
   position: relative;
-  width: 85%; /* Fixed width value */
-  animation: progressFill 1.5s ease-out forwards;
-  animation-delay: 0.5s; /* Fixed delay value */
+  width: 100%;
+  overflow: hidden;
 }
 
 .dark-mode .skill-progress {
-  background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.8));
+  background: linear-gradient(120deg, #222 30%, #fff 50%, #222 70%);
+  background-size: 200% 100%;
+  animation: skillBarShimmerDark 2.5s linear infinite;
 }
 
 .light-mode .skill-progress {
-  background: linear-gradient(90deg, #0a0a0a, rgba(10, 10, 10, 0.8));
+  background: linear-gradient(120deg, #eee 30%, #000 50%, #eee 70%);
+  background-size: 200% 100%;
+  animation: skillBarShimmerLight 2.5s linear infinite;
+}
+
+@keyframes skillBarShimmerDark {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes skillBarShimmerLight {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .skill-progress::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  animation: shimmer 2s infinite;
+  display: none;
 }
 
 /* Category Display */
@@ -438,8 +444,8 @@
   justify-content: center;
   align-items: center;
   gap: 3rem;
-  margin-top: 4rem;
-  padding: 2rem 0;
+  margin-top: 1rem;
+  padding: 0.5rem 0;
   border-top: 1px solid;
   border-bottom: 1px solid;
 }
@@ -575,20 +581,6 @@
   to {
     transform: scale(1);
   }
-}
-
-@keyframes progressFill {
-  from {
-    width: 0;
-  }
-  to {
-    width: 85%; /* Fixed width value */
-  }
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
 }
 
 @keyframes fadeInUp {
