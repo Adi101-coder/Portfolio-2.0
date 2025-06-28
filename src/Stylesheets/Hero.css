@@ -434,7 +434,7 @@
     padding: 0 0 0 2vw !important;
   }
   .hero-content {
-    margin-top: 16vw !important;
+    margin-top: 38vw !important;
   }
   
   /* Further increased text size for very small screens */
@@ -467,6 +467,12 @@
     width: 32px;
     height: 32px;
     font-size: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: clamp(1.2rem, 6vw, 1.7rem) !important;
   }
 }
 
