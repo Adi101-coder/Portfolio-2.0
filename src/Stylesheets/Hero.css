@@ -430,7 +430,11 @@
 
 @media (max-width: 600px) {
   .hero {
-    padding: 0 4vw;
+    min-height: 60vh !important;
+    padding: 0 0 0 2vw !important;
+  }
+  .hero-content {
+    margin-top: 16vw !important;
   }
   
   /* Further increased text size for very small screens */

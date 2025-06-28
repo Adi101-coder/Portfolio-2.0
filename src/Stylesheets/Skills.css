@@ -2,8 +2,8 @@
 .skills-section {
   padding: 8rem 2rem 0.5rem 2rem;
   position: relative;
-  overflow: hidden;
-  min-height: 100vh;
+  overflow: visible;
+  min-height: 60vh;
 }
 
 .dark-mode .skills-section {
@@ -615,7 +615,7 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .section-title {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
   }
   
   .skills-grid {
@@ -624,27 +624,33 @@
   }
   
   .skill-category {
-    min-height: 450px;
+    min-height: 400px;
+    padding: 1.2rem;
   }
 }
 
 @media (max-width: 768px) {
   .skills-section {
-    padding: 5rem 1rem;
+    padding: 4rem 0.5rem 0.5rem 0.5rem;
+    min-height: 40vh;
   }
 
   .section-title {
-    font-size: 2.8rem;
+    font-size: 2rem;
+    margin-bottom: 2rem;
   }
 
   .skills-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.2rem;
   }
   
   .skill-category {
-    min-height: auto;
-    padding: 1.5rem;
+    min-height: 300px;
+    padding: 0.7rem;
+    opacity: 1;
+    transform: translateY(0);
+    animation: none;
   }
 
   .skills-summary {
@@ -661,18 +667,49 @@
 
 @media (max-width: 480px) {
   .skills-section {
-    padding: 4rem 1rem;
+    padding: 2rem 0.2rem 0.2rem 0.2rem;
+    min-height: 20vh;
   }
 
   .section-title {
-    font-size: 2.2rem;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
   }
 
   .skill-category {
-    padding: 1.5rem;
+    min-height: 180px;
+    padding: 0.4rem;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    animation: none !important;
   }
 
   .category-title {
     font-size: 1.2rem;
+  }
+
+  .skills-grid {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .skill-item {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+
+  .skill-progress {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .skills-section {
+    display: block !important;
+    opacity: 1 !important;
+    min-height: 200px !important;
+    height: auto !important;
+    position: relative !important;
+    z-index: 10 !important;
   }
 } 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
@@ -7,12 +7,28 @@ import Hero from './components/Hero';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
-import MyWorks from './myworks'; // Use consistent PascalCase naming
 import ThemeToggle from './components/ThemeToggle';
 import AnimatedBackground from './components/AnimatedBackground';
 import FloatingSocialDock from './components/FloatingSocialDock';
-import ClassWorks from './components/ClassWorks';
 import './App.css';
+
+// Lazy load components for better performance
+const MyWorks = lazy(() => import('./myworks'));
+const ClassWorks = lazy(() => import('./components/ClassWorks'));
+
+// Loading component for lazy-loaded routes
+const LoadingSpinner = () => (
+  <div style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    fontSize: '1.2rem',
+    color: 'var(--text-color)'
+  }}>
+    Loading...
+  </div>
+);
 
 function AppContent() {
   const { theme } = useTheme();
@@ -41,24 +57,28 @@ function AppContent() {
               </motion.div>
             } />
             <Route path="/classworks" element={
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                <ClassWorks />
-              </motion.div>
+              <Suspense fallback={<LoadingSpinner />}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <ClassWorks />
+                </motion.div>
+              </Suspense>
             } />
             <Route path="/myworks" element={
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                <MyWorks />
-              </motion.div>
+              <Suspense fallback={<LoadingSpinner />}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <MyWorks />
+                </motion.div>
+              </Suspense>
             } />
           </Routes>
         </AnimatePresence>

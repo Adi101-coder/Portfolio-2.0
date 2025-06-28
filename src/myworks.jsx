@@ -3,6 +3,11 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Eye, Star, GitBranch, Calendar } from 'lucide-react';
 import { useTheme } from './context/ThemeContext'; // Import from your existing context
 
+// Import project images
+import hireIndexImage from './assets/HireIndex.png';
+import amanstarImage from './assets/Amanstar.png';
+import vrikshaImage from './assets/Vriksha.png';
+
 const MyWorks = () => {
   const { theme } = useTheme(); // Use your existing theme context
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -31,75 +36,55 @@ const MyWorks = () => {
   const projects = [
     {
       id: 1,
-      title: "E-commerce Platform",
-      description: "A full-stack e-commerce solution with advanced filtering, real-time inventory, and seamless payment integration",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop",
-      tags: ["React", "Node.js", "MongoDB", "Stripe"],
-      link: "#",
+      title: "HireIndex",
+      description: "AI-powered resume parser that analyzes resumes against ATS requirements and returns comprehensive ATS scores with detailed feedback for improvement. Features include PDF/Word document parsing, Google Gemini AI integration, and detailed scoring breakdown.",
+      image: hireIndexImage,
+      tags: ["React", "TypeScript", "Express.js", "Google Gemini AI", "PDF/Word Parsing"],
+      link: "https://hire-index-v1-5e4w.vercel.app/",
+      githubUrl: "https://github.com/AxAbhishek0309/HireIndex-v1",
       status: "Live",
-      stars: 145,
+      stars: 15,
       commits: 89,
       date: "2024"
     },
     {
       id: 2,
-      title: "AI Task Manager",
-      description: "Intelligent productivity app with AI-powered task prioritization, drag-and-drop functionality, and team collaboration",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=250&fit=crop",
-      tags: ["React", "TypeScript", "OpenAI", "Firebase"],
+      title: "AmanStar",
+      description: "An innovative project currently under development, showcasing cutting-edge features and modern web technologies. This project demonstrates advanced development practices and innovative solutions.",
+      image: amanstarImage,
+      tags: ["React", "Node.js", "Modern Web Stack", "Innovation"],
       link: "#",
-      status: "Beta",
-      stars: 78,
-      commits: 156,
+      githubUrl: "#",
+      status: "In Development",
+      stars: 0,
+      commits: 0,
       date: "2024"
     },
     {
       id: 3,
-      title: "Weather Analytics Hub",
-      description: "Real-time weather tracking with predictive analytics, interactive maps, and customizable dashboards",
-      image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=250&fit=crop",
-      tags: ["JavaScript", "D3.js", "Weather API", "Chart.js"],
-      link: "#",
+      title: "Vriksha",
+      description: "E-commerce platform for premium plants with 3D visualizations, AI chatbot, and comprehensive plant care features. Features include NextAuth.js authentication, Three.js 3D models, and AI-powered customer support.",
+      image: vrikshaImage,
+      tags: ["Next.js 15", "TypeScript", "TailwindCSS", "Three.js", "NextAuth.js"],
+      link: "https://vrikshaby-gradians.vercel.app/",
+      githubUrl: "https://github.com/AxAbhishek0309/VrikshabyGradians",
       status: "Live",
-      stars: 92,
+      stars: 8,
       commits: 67,
-      date: "2023"
+      date: "2024"
     },
     {
       id: 4,
-      title: "Creative Portfolio",
-      description: "Interactive portfolio website with 3D animations, smooth transitions, and responsive design",
+      title: "Project Template",
+      description: "A template project showcasing modern web development practices and innovative solutions. This serves as a foundation for future projects with best practices and modern architecture.",
       image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=250&fit=crop",
-      tags: ["Three.js", "React", "GSAP", "Tailwind"],
+      tags: ["React", "Modern Stack", "Best Practices", "Template"],
       link: "#",
-      status: "Live",
-      stars: 234,
-      commits: 45,
+      githubUrl: "#",
+      status: "Coming Soon",
+      stars: 0,
+      commits: 0,
       date: "2024"
-    },
-    {
-      id: 5,
-      title: "Blockchain Wallet",
-      description: "Secure cryptocurrency wallet with multi-chain support, DeFi integration, and advanced security features",
-      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=250&fit=crop",
-      tags: ["Web3", "Solidity", "React", "Ethers.js"],
-      link: "#",
-      status: "Development",
-      stars: 56,
-      commits: 123,
-      date: "2024"
-    },
-    {
-      id: 6,
-      title: "Social Media Dashboard",
-      description: "Comprehensive social media management platform with analytics, scheduling, and engagement tracking",
-      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=250&fit=crop",
-      tags: ["Vue.js", "Python", "Redis", "PostgreSQL"],
-      link: "#",
-      status: "Live",
-      stars: 167,
-      commits: 201,
-      date: "2023"
     }
   ];
 
@@ -217,7 +202,7 @@ const MyWorks = () => {
       color: currentTheme.text,
       transition: 'all 0.3s ease',
       padding: '2rem',
-      paddingTop: '4rem',
+      paddingTop: '6rem',
       fontFamily: '"Inter", system-ui, -apple-system, sans-serif',
       position: 'relative'
     },
@@ -283,7 +268,7 @@ const MyWorks = () => {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
-      filter: isDark ? 'brightness(0.9) contrast(1.1)' : 'brightness(1.1) contrast(0.9)'
+      filter: 'none'
     },
     overlay: {
       position: 'absolute',
@@ -371,145 +356,249 @@ const MyWorks = () => {
   };
 
   return (
-    <motion.div 
-      style={styles.container}
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
+    <>
+      <style>{`
+        @media (max-width: 900px) {
+          .myworks-grid {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+            gap: 1.2rem !important;
+            padding: 0 0.5rem !important;
+          }
+          .myworks-card {
+            border-radius: 14px !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .myworks-container {
+            padding: 1rem !important;
+            padding-top: 4rem !important;
+          }
+          .myworks-header {
+            margin-bottom: 2rem !important;
+            max-width: 98vw !important;
+          }
+          .myworks-title {
+            font-size: 2rem !important;
+          }
+          .myworks-subtitle {
+            font-size: 1rem !important;
+            margin-top: 1rem !important;
+          }
+          .myworks-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1rem !important;
+            padding: 0 0.2rem !important;
+          }
+          .myworks-card {
+            padding: 0.7rem !important;
+            border-radius: 10px !important;
+          }
+          .myworks-image-container {
+            height: 140px !important;
+          }
+          .myworks-content {
+            padding: 1rem !important;
+          }
+          .myworks-project-title {
+            font-size: 1.1rem !important;
+          }
+          .myworks-description {
+            font-size: 0.9rem !important;
+            margin-bottom: 1rem !important;
+          }
+          .myworks-stats {
+            gap: 0.7rem !important;
+            font-size: 0.75rem !important;
+            margin-bottom: 1rem !important;
+          }
+          .myworks-tag {
+            font-size: 0.7rem !important;
+            padding: 0.3rem 0.6rem !important;
+          }
+          .myworks-action-btn {
+            padding: 0.5rem 0.7rem !important;
+            font-size: 0.8rem !important;
+          }
+        }
+      `}</style>
       <motion.div 
-        style={styles.header}
-        variants={headerVariants}
-      >
-        <motion.h1 
-          style={styles.title}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          My Works
-          <motion.div 
-            style={styles.titleAccent}
-            initial={{ width: 0 }}
-            animate={{ width: '100px' }}
-            transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-          />
-        </motion.h1>
-        <motion.p 
-          style={styles.subtitle}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          A curated collection of innovative projects showcasing modern web development,
-          creative problem-solving, and cutting-edge technologies
-        </motion.p>
-      </motion.div>
-
-      <motion.div 
-        style={styles.grid}
+        style={styles.container}
+        className="myworks-container"
         variants={containerVariants}
+        initial="hidden"
+        animate="visible"
       >
-        {projects.map((project, index) => {
-          const isVisible = visibleCards.has(index.toString());
-          const isHovered = hoveredCard === project.id;
-          
-          return (
-            <motion.div
-              key={project.id}
-              style={styles.card}
-              variants={cardVariants}
-              whileHover="hover"
-              onMouseEnter={() => setHoveredCard(project.id)}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              <div style={styles.imageContainer}>
-                <motion.img 
-                  src={project.image} 
-                  alt={project.title}
-                  style={{
-                    ...styles.image,
-                    ...(isHovered ? { filter: isDark ? 'brightness(1) contrast(1.2)' : 'brightness(1.2) contrast(1)' } : {})
-                  }}
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.4 }}
-                />
-                <motion.div 
-                  style={{
-                    ...styles.statusBadge,
-                    backgroundColor: getStatusColor(project.status)
-                  }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: 0.2 }}
-                >
-                  {project.status}
-                </motion.div>
-                
-                <motion.div 
-                  style={styles.overlay}
-                  variants={overlayVariants}
-                >
-                  <motion.button 
-                    style={styles.actionBtn}
-                    variants={buttonVariants}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+        <motion.div 
+          style={styles.header}
+          className="myworks-header"
+          variants={headerVariants}
+        >
+          <motion.h1 
+            style={styles.title}
+            className="myworks-title"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            My Works
+            <motion.div 
+              style={styles.titleAccent}
+              initial={{ width: 0 }}
+              animate={{ width: '100px' }}
+              transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+            />
+          </motion.h1>
+          <motion.p 
+            style={styles.subtitle}
+            className="myworks-subtitle"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            A curated collection of innovative projects showcasing modern web development,
+            creative problem-solving, and cutting-edge technologies
+          </motion.p>
+        </motion.div>
+
+        <motion.div 
+          style={styles.grid}
+          className="myworks-grid"
+          variants={containerVariants}
+        >
+          {projects.map((project, index) => {
+            const isVisible = visibleCards.has(index.toString());
+            const isHovered = hoveredCard === project.id;
+            
+            return (
+              <motion.div
+                key={project.id}
+                style={styles.card}
+                className="myworks-card"
+                variants={cardVariants}
+                whileHover="hover"
+                onMouseEnter={() => setHoveredCard(project.id)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <div style={styles.imageContainer} className="myworks-image-container">
+                  <motion.img 
+                    src={project.image} 
+                    alt={project.title}
+                    style={{
+                      ...styles.image,
+                      ...(isHovered ? { filter: 'brightness(1.05)' } : {})
+                    }}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.4 }}
+                    onError={(e) => {
+                      console.error(`Failed to load image for ${project.title}:`, project.image);
+                      e.target.src = "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop";
+                    }}
+                  />
+                  <motion.div 
+                    style={{
+                      ...styles.statusBadge,
+                      backgroundColor: getStatusColor(project.status)
+                    }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: 0.2 }}
                   >
-                    <Eye size={16} />
-                    View Project
-                  </motion.button>
-                  <motion.button 
-                    style={styles.actionBtn}
-                    variants={buttonVariants}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    {project.status}
+                  </motion.div>
+                  <motion.div 
+                    style={styles.overlay}
+                    className="myworks-overlay"
+                    variants={overlayVariants}
                   >
-                    <ExternalLink size={16} />
-                    Live Demo
-                  </motion.button>
-                </motion.div>
-              </div>
-              
-              <div style={styles.content}>
-                <h3 style={styles.projectTitle}>{project.title}</h3>
-                <p style={styles.description}>{project.description}</p>
-                
-                <div style={styles.stats}>
-                  <div style={styles.stat}>
-                    <Star size={14} />
-                    {project.stars}
+                    {project.githubUrl && project.githubUrl !== "#" ? (
+                      <motion.a 
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={styles.actionBtn}
+                        className="myworks-action-btn"
+                        variants={buttonVariants}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Eye size={16} />
+                        View Code
+                      </motion.a>
+                    ) : (
+                      <motion.span 
+                        style={{...styles.actionBtn, opacity: 0.6, cursor: 'not-allowed'}} 
+                        className="myworks-action-btn"
+                        variants={buttonVariants}
+                      >
+                        <Eye size={16} />
+                        Private
+                      </motion.span>
+                    )}
+                    {project.link && project.link !== "#" ? (
+                      <motion.a 
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={styles.actionBtn}
+                        className="myworks-action-btn"
+                        variants={buttonVariants}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <ExternalLink size={16} />
+                        Live Demo
+                      </motion.a>
+                    ) : (
+                      <motion.span 
+                        style={{...styles.actionBtn, opacity: 0.6, cursor: 'not-allowed'}} 
+                        className="myworks-action-btn"
+                        variants={buttonVariants}
+                      >
+                        <ExternalLink size={16} />
+                        Coming Soon
+                      </motion.span>
+                    )}
+                  </motion.div>
+                </div>
+                <div style={styles.content} className="myworks-content">
+                  <h3 style={styles.projectTitle} className="myworks-project-title">{project.title}</h3>
+                  <p style={styles.description} className="myworks-description">{project.description}</p>
+                  <div style={styles.stats} className="myworks-stats">
+                    <div style={styles.stat} className="myworks-stat">
+                      <Star size={14} />
+                      {project.stars}
+                    </div>
+                    <div style={styles.stat} className="myworks-stat">
+                      <GitBranch size={14} />
+                      {project.commits}
+                    </div>
+                    <div style={styles.stat} className="myworks-stat">
+                      <Calendar size={14} />
+                      {project.date}
+                    </div>
                   </div>
-                  <div style={styles.stat}>
-                    <GitBranch size={14} />
-                    {project.commits}
-                  </div>
-                  <div style={styles.stat}>
-                    <Calendar size={14} />
-                    {project.date}
+                  <div style={styles.tags} className="myworks-tags">
+                    {project.tags.map((tag, tagIndex) => (
+                      <motion.span 
+                        key={tagIndex} 
+                        style={styles.tag}
+                        className="myworks-tag"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: 0.1 * tagIndex }}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        {tag}
+                      </motion.span>
+                    ))}
                   </div>
                 </div>
-                
-                <div style={styles.tags}>
-                  {project.tags.map((tag, tagIndex) => (
-                    <motion.span 
-                      key={tagIndex} 
-                      style={styles.tag}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3, delay: 0.1 * tagIndex }}
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      {tag}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </>
   );
 };
 

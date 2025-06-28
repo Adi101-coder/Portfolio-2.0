@@ -117,14 +117,12 @@ const Skills = () => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
       >
         <motion.h2 
           className="section-title"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
         >
           Skills & Expertise
         </motion.h2>
@@ -138,13 +136,14 @@ const Skills = () => {
               className="skill-category" 
               key={index}
               variants={categoryVariants}
+              initial="hidden"
+              whileInView="visible"
             >
               <motion.h3 
                 className="category-title"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                viewport={{ once: true }}
               >
                 {category.category}
               </motion.h3>
@@ -158,12 +157,20 @@ const Skills = () => {
                     className="skill-item" 
                     key={skillIndex}
                     variants={skillVariants}
+                    initial="hidden"
+                    whileInView="visible"
                   >
                     <div className="skill-info">
                       <span className="skill-name">{skill.name}</span>
                     </div>
                     <div className="skill-bar">
-                      <div className="skill-progress" />
+                      <motion.div 
+                        className="skill-progress"
+                        custom={skill.level}
+                        variants={progressVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                      />
                     </div>
                   </motion.div>
                 ))}

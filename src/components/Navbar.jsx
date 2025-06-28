@@ -64,7 +64,7 @@ const Navbar = () => {
           style={{ 
             textDecoration: 'none', 
             color: 'inherit',
-            fontSize: '1.5rem',
+            fontSize: window.innerWidth <= 480 ? '1.1rem' : window.innerWidth <= 768 ? '1.3rem' : '1.5rem',
             fontWeight: '700'
           }}
         >
@@ -72,25 +72,7 @@ const Navbar = () => {
         </Link>
       </motion.div>
 
-      {/* Middle - Class Works */}
-      <motion.div
-        variants={linkVariants}
-        whileHover="hover"
-      >
-        <Link 
-          to="/classworks" 
-          style={{ 
-            textDecoration: 'none', 
-            color: 'inherit',
-            fontSize: '1.1rem',
-            fontWeight: '500'
-          }}
-        >
-          Class Works
-        </Link>
-      </motion.div>
-
-      {/* Right - My Works */}
+      {/* Middle - My Works */}
       <motion.div
         variants={linkVariants}
         whileHover="hover"
@@ -100,11 +82,29 @@ const Navbar = () => {
           style={{ 
             textDecoration: 'none', 
             color: 'inherit',
-            fontSize: '1.1rem',
+            fontSize: window.innerWidth <= 480 ? '0.8rem' : window.innerWidth <= 768 ? '0.9rem' : '1.1rem',
             fontWeight: '500'
           }}
         >
           My Works
+        </Link>
+      </motion.div>
+
+      {/* Right - Class Works */}
+      <motion.div
+        variants={linkVariants}
+        whileHover="hover"
+      >
+        <Link 
+          to="/classworks" 
+          style={{ 
+            textDecoration: 'none', 
+            color: 'inherit',
+            fontSize: window.innerWidth <= 480 ? '0.8rem' : window.innerWidth <= 768 ? '0.9rem' : '1.1rem',
+            fontWeight: '500'
+          }}
+        >
+          Class Works
         </Link>
       </motion.div>
     </motion.nav>
