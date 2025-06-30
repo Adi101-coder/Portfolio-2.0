@@ -21,8 +21,7 @@ const Skills = () => {
         { name: "Node.js", level: 80 },
         { name: "Express.js", level: 75 },
         { name: "MongoDB", level: 70 },
-        { name: "SQL", level: 65 },
-        { name: "Python", level: 60 }
+        { name: "SQL", level: 65 }
       ]
     },
     {
@@ -58,7 +57,8 @@ const Skills = () => {
       items: [
         { name: "C", level: 70 },
         { name: "C++", level: 75 },
-        { name: "Java", level: 80 }
+        { name: "Java", level: 80 },
+        { name: "Python", level: 60 }
       ]
     }
   ];
