@@ -1,0 +1,52 @@
+.background-beams {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  mask-repeat: no-repeat;
+  mask-size: 40px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.beams-svg {
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Light mode adjustments */
+.light-mode .background-beams {
+  opacity: 0.3;
+}
+
+/* Dark mode adjustments */
+.dark-mode .background-beams {
+  opacity: 0.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .background-beams {
+    opacity: 0.4;
+  }
+  
+  .light-mode .background-beams {
+    opacity: 0.2;
+  }
+}
+
+@media (max-width: 480px) {
+  .background-beams {
+    opacity: 0.3;
+  }
+  
+  .light-mode .background-beams {
+    opacity: 0.15;
+  }
+} 

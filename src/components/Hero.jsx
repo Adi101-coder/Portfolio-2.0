@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import BackgroundBeams from './BackgroundBeams';
 import '../Stylesheets/Hero.css';
 
 const TITLES = [
@@ -72,6 +73,7 @@ const Hero = ({ theme }) => {
     <section className="hero">
       <div className={`hero-background ${theme === 'light' ? 'light-dots' : ''}`}>
         <div className="grain-overlay"></div>
+        <BackgroundBeams />
       </div>
       
       <motion.div 

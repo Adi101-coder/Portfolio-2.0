@@ -30,8 +30,8 @@ const Projects = () => {
       description: "An innovative project currently under development, showcasing cutting-edge features and modern web technologies.",
       tech: "React • Node.js • Modern Web Stack",
       image: amanstarImage,
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: "https://amanstar-1.onrender.com/",
+      githubUrl: "https://github.com/Adi101-coder/AmanStar/tree/main",
       status: "In Development"
     },
     {

@@ -9,6 +9,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import ThemeToggle from './components/ThemeToggle';
 import AnimatedBackground from './components/AnimatedBackground';
+import BackgroundBeams from './components/BackgroundBeams';
 import FloatingSocialDock from './components/FloatingSocialDock';
 import './App.css';
 
@@ -36,6 +37,7 @@ function AppContent() {
   return (
     <div className={`App ${theme}-mode`}>
       <AnimatedBackground />
+      <BackgroundBeams />
       <div className="theme-toggle-container">
         <ThemeToggle />
       </div>
