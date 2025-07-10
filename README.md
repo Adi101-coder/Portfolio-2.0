@@ -125,9 +125,9 @@ This project is open source and available under the MIT License.
 
 ## 👤 Author
 
-**Aditya Sharma**
+**Adit katiyar**
 - GitHub: [@Adi101-coder](https://github.com/Adi101-coder)
-- Portfolio: [Live Demo](https://your-portfolio-url.com)
+- Portfolio: [Live Demo]([https://your-portfolio-url.com](https://portfolio-2-0-xkl8.vercel.app/))
 
 ---
 
