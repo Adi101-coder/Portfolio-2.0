@@ -50,12 +50,12 @@ const MyWorks = () => {
     {
       id: 2,
       title: "AmanStar",
-      description: "An innovative project currently under development, showcasing cutting-edge features and modern web technologies. This project demonstrates advanced development practices and innovative solutions.",
+      description: "A completed innovative project showcasing cutting-edge features and modern web technologies. This project demonstrates advanced development practices and innovative solutions.",
       image: amanstarImage,
       tags: ["React", "Node.js", "Modern Web Stack", "Innovation"],
-      link: "https://amanstar-1.onrender.com/",
+      link: "https://amanstar-it.com/",
       githubUrl: "https://github.com/Adi101-coder/AmanStar/tree/main",
-      status: "In Development",
+      status: "Live",
       stars: 0,
       commits: 0,
       date: "2024"

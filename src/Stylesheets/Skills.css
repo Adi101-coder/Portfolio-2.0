@@ -4,6 +4,7 @@
   position: relative;
   overflow: visible;
   min-height: 60vh;
+  background: #151c28;
 }
 
 .dark-mode .skills-section {
@@ -711,5 +712,98 @@
     height: auto !important;
     position: relative !important;
     z-index: 10 !important;
+  }
+} 
+
+.skills-icons-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.skills-icons-bg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  gap: 2.2rem 2.2rem;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0 3rem 0;
+  justify-items: center;
+  align-items: center;
+  z-index: 0;
+  position: relative;
+}
+
+.skills-icon-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  /* Remove background, border-radius, and box-shadow for no visible box */
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  transition: transform 0.22s cubic-bezier(0.4,0,0.2,1), opacity 0.22s;
+  will-change: transform;
+  cursor: pointer;
+  opacity: 0.95;
+  pointer-events: auto;
+}
+
+.skills-icon-item:hover {
+  transform: scale(1.13);
+  opacity: 1;
+  z-index: 2;
+  background: none;
+  box-shadow: none;
+}
+
+.skills-icon-item img, .skills-icon-item svg {
+  width: 44px;
+  height: 44px;
+  display: block;
+}
+
+.icon-gradient-ring {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  padding: 2px;
+  background: conic-gradient(#bbb, #fff, #bbb);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
+}
+
+.icon-gradient-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.dark-mode .icon-gradient-inner {
+  background: #181c28;
+}
+
+@media (max-width: 600px) {
+  .icon-gradient-ring {
+    width: 32px;
+    height: 32px;
+    padding: 1.5px;
+  }
+  .icon-gradient-inner {
+    width: 24px;
+    height: 24px;
   }
 } 
