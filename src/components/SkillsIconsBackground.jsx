@@ -2,13 +2,25 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaReact, FaJs, FaHtml5, FaCss3Alt, FaVuejs, FaBootstrap, FaNodeJs, FaGitAlt, FaGithub, FaFigma, FaPython, FaJava } from 'react-icons/fa';
 import { SiExpress, SiMongodb, SiMysql, SiHeroku, SiNetlify, SiVercel, SiRender, SiKeras, SiNumpy, SiPandas, SiScikitlearn, SiCplusplus, SiC, SiAdobe, SiDocker } from 'react-icons/si';
-import matplotlibLogo from '../assets/matplotlib.svg';
 import { useTheme } from '../context/ThemeContext';
 
 const SkillsIconsBackground = () => {
   const { theme } = useTheme();
   const expressColor = theme === 'dark' ? '#fff' : '#000';
   const vercelColor = theme === 'dark' ? '#fff' : '#000';
+
+  // Custom Matplotlib SVG component
+  const MatplotlibIcon = () => (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="#11557c"/>
+      <g>
+        <ellipse cx="16" cy="16" rx="10" ry="4" fill="#ffffff" fillOpacity="0.8"/>
+        <ellipse cx="16" cy="16" rx="7" ry="2.5" fill="#2196f3" fillOpacity="0.7"/>
+        <ellipse cx="16" cy="16" rx="4" ry="1.5" fill="#ff9800" fillOpacity="0.7"/>
+        <ellipse cx="16" cy="16" rx="1.5" ry="0.5" fill="#43a047" fillOpacity="0.7"/>
+      </g>
+    </svg>
+  );
 
   const icons = [
     { name: 'React', icon: <FaReact color="#61DAFB" /> },
@@ -32,7 +44,7 @@ const SkillsIconsBackground = () => {
     { name: 'Keras', icon: <SiKeras color="#D00000" /> },
     { name: 'NumPy', icon: <SiNumpy color="#013243" /> },
     { name: 'Pandas', icon: <SiPandas color="#150458" /> },
-    { name: 'Matplotlib', icon: <img src={matplotlibLogo} alt="Matplotlib" style={{ width: 32, height: 32 }} /> },
+    { name: 'Matplotlib', icon: <MatplotlibIcon /> },
     { name: 'Scikit-Learn', icon: <SiScikitlearn color="#F7931E" /> },
     { name: 'C', icon: <SiC color="#A8B9CC" /> },
     { name: 'C++', icon: <SiCplusplus color="#00599C" /> },

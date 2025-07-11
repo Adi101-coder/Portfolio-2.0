@@ -357,21 +357,54 @@
   }
 }
 
+/* Hero Dock Container for Small Screens */
+.hero-dock-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  background: transparent;
+}
+
+.hero-dock-container .dock-panel {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  transform: none;
+}
+
+/* Ensure the dock doesn't interfere with other elements */
+.hero-dock-container .dock-outer {
+  position: relative;
+  z-index: 10;
+}
+
 /* Responsive Design */
 @media (max-width: 900px) {
   .hero {
     align-items: center;
     padding: 0 2vw;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
   
   .hero-content {
     margin-top: 4vh;
     text-align: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   /* Increased text size for mobile */
   .hero-title {
-    font-size: clamp(2.5rem, 8.5vw, 4.5rem);
+    font-size: clamp(3.5rem, 10vw, 5rem);
     margin-bottom: 2rem;
   }
   
@@ -384,6 +417,10 @@
   .download-resume-btn {
     padding: 0.9rem 2rem;
     font-size: 1.1rem;
+  }
+  
+  .hero-dock-container {
+    height: 70px;
   }
   
   /* Mobile-optimized social taskbar */
@@ -432,14 +469,20 @@
   .hero {
     min-height: 60vh !important;
     padding: 0 0 0 2vw !important;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
   .hero-content {
     margin-top: 38vw !important;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   /* Further increased text size for very small screens */
   .hero-title {
-    font-size: clamp(2.8rem, 9vw, 4rem);
+    font-size: clamp(4rem, 12vw, 5.5rem);
     letter-spacing: -1px;
     margin-bottom: 1.8rem;
   }
@@ -453,6 +496,10 @@
   .download-resume-btn {
     padding: 1rem 2.2rem;
     font-size: 1.2rem;
+  }
+  
+  .hero-dock-container {
+    height: 60px;
   }
   
   /* Smaller social taskbar for very small screens */
@@ -471,8 +518,24 @@
 }
 
 @media (max-width: 400px) {
+  .hero {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
   .hero-title {
-    font-size: clamp(1.2rem, 6vw, 1.7rem) !important;
+    font-size: clamp(3.5rem, 15vw, 4.5rem) !important;
+  }
+  
+  .hero-dock-container {
+    height: 50px;
   }
 }
 

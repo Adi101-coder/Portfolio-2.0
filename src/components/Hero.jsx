@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import BackgroundBeams from './BackgroundBeams';
+import FloatingSocialDock from './FloatingSocialDock';
 import '../Stylesheets/Hero.css';
 
 const TITLES = [
@@ -12,6 +13,18 @@ const TITLES = [
 const Hero = ({ theme }) => {
   const [titleIndex, setTitleIndex] = useState(0);
   const [fade, setFade] = useState(true);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth <= 768);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -76,13 +89,13 @@ const Hero = ({ theme }) => {
         <BackgroundBeams />
       </div>
       
-      <motion.div 
+      <motion.div
         className="hero-content"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <motion.h1 
+        <motion.h1
           className="hero-title"
           variants={itemVariants}
         >
@@ -99,18 +112,18 @@ const Hero = ({ theme }) => {
           </motion.span>
         </motion.h1>
         
-        <motion.p 
+        <motion.p
           className="hero-description"
           variants={itemVariants}
         >
           Passionate about building impactful digital solutions at the intersection of Full Stack Development, Machine Learning, and Competitive Programming.
         </motion.p>
         
-        <motion.div 
+        <motion.div
           className="hero-actions"
           variants={itemVariants}
         >
-          <motion.button 
+          <motion.button
             className="download-resume-btn"
             variants={buttonVariants}
             whileHover="hover"
@@ -120,6 +133,12 @@ const Hero = ({ theme }) => {
           </motion.button>
         </motion.div>
       </motion.div>
+      
+      {isSmallScreen && (
+        <div className="hero-dock-container">
+          <FloatingSocialDock />
+        </div>
+      )}
     </section>
   );
 };

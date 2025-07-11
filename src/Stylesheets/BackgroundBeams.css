@@ -18,6 +18,8 @@
   z-index: 0;
   height: 100%;
   width: 100%;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 /* Light mode adjustments */
@@ -39,6 +41,10 @@
   .light-mode .background-beams {
     opacity: 0.2;
   }
+  
+  .beams-svg {
+    transform: scale(1.2);
+  }
 }
 
 @media (max-width: 480px) {
@@ -48,5 +54,23 @@
   
   .light-mode .background-beams {
     opacity: 0.15;
+  }
+  
+  .beams-svg {
+    transform: scale(1.5);
+  }
+}
+
+@media (max-width: 320px) {
+  .background-beams {
+    opacity: 0.2;
+  }
+  
+  .light-mode .background-beams {
+    opacity: 0.1;
+  }
+  
+  .beams-svg {
+    transform: scale(2);
   }
 } 
